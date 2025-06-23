@@ -15,6 +15,17 @@ migrate = Migrate(app, db)
 jwt = JWTManager(app)
 CORS(app)
 
+from controllers.auth_controller import auth_bp
+from controllers.episode_controller import episode_bp
+from controllers.guest_controller import guest_bp
+from controllers.appearance_controler import appearance_bp
+
+
+app.register_blueprint(auth_bp)
+app.register_blueprint(episode_bp)
+app.register_blueprint(guest_bp)
+app.register_blueprint(appearance_bp)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
