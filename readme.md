@@ -1,26 +1,110 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_jwt_extended import JWTManager
-from flask_cors import CORS
-from models import db
-from controllers.auth_controller import auth_bp
-from controllers.guest_controller import guest_bp
-from controllers.episode_controller import episode_bp
-from controllers.appearance_controller import appearance_bp
 
-app = Flask(__name__)
-app.config.from_pyfile('config.py')
+LATE SHOW API 
 
-db.init_app(app)
-migrate = Migrate(app, db)
-jwt = JWTManager(app)
-CORS(app)
 
-app.register_blueprint(auth_bp)
-app.register_blueprint(guest_bp)
-app.register_blueprint(episode_bp)
-app.register_blueprint(appearance_bp)
+This is a backend flask appliction for a late Night Tv show system.Its entails user registration and JWT-based authentication.It uses PostgresSQL for persistent storage
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+
+SETUP INSTRUCTIONS
+
+Run the following commands in the terminal to install dependencies:
+      1) Pipenv install flask_sqlalchemy flask_migrate flask-jwt-extended psycopg2-binary 
+
+
+      2)sudo apt install postgresql postgresql-contrib
+
+
+PostgreSQL DB setup 
+The database has already been setup so no need to create it
+
+
+To run server use flask run command
+
+MIGRATIONS
+Run the following commands:
+
+flask db init     # only first time
+flask db migrate
+flask db upgrade
+
+
+Auth Flow
+🔸 Register
+POST /auth/register
+
+Request:
+
+
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "secret123"
+}
+Response:
+
+
+{
+  "message": "User registered successfully."
+}
+🔸 Login
+POST /auth/login
+
+Request:
+
+{
+  "email": "john@example.com",
+  "password": "secret123"
+}
+Response:
+
+
+{
+  "token": "your-jwt-token"
+}
+🔸 Using the token
+Include it in the header for protected routes:
+          Authorization: Bearer your-jwt-token
+
+Routes list
+
+
+| Method | Endpoint       | Auth Required | Description              |
+| ------ | -------------- | ------------- | -------------------      |
+| POST   | /appearances   | Required      | Shows all users          |
+| POST   | /register      | None          | Adds a new user          |
+| POST   | /login         | None          | Adds an account          |
+| GET    | /guests        | None          | List all guest           |
+| GET    | /episodes/<id> | None          | Get episode by ID        |
+| DELETE | /episodes/<id> | Required      | Delete episode           |
+
+
+POST /appearances (Requires Auth)
+Headers:
+
+
+Authorization: Bearer your-jwt-token
+Request:
+
+
+{
+  "episode_id": 1,
+  "guest_id": 2
+}
+Response:
+
+
+{
+  "id": 5,
+  "episode_id": 1,
+  "guest_id": 2,
+  "created_at": "2025-06-24T10:00:00"
+}
+
+
+Postman Usage
+1)Import the included Postman collection: postman_collection.json
+
+2)Set an environment variable token after login.
+
+3)All protected routes will automatically use {{token}} in the Authorization header.
