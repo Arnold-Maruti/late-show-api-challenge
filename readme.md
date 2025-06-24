@@ -24,7 +24,7 @@ To run server use flask run command
 MIGRATIONS
 Run the following commands:
 
-flask db init     # only first time
+flask db init     
 flask db migrate
 flask db upgrade
 
@@ -45,6 +45,9 @@ Request:
   "email": "john@example.com",
   "password": "secret123"
 }
+
+
+
 Response:
 
 
@@ -64,6 +67,9 @@ Request:
   "email": "john@example.com",
   "password": "secret123"
 }
+
+
+
 Response:
 
 
@@ -92,10 +98,15 @@ Routes list
 
 
 POST /appearances (Requires Auth)
+
+
 Headers:
 
 
 Authorization: Bearer your-jwt-token
+
+
+
 Request:
 
 
@@ -103,6 +114,9 @@ Request:
   "episode_id": 1,
   "guest_id": 2
 }
+
+
+
 Response:
 
 
@@ -115,8 +129,14 @@ Response:
 
 
 Postman Usage
+
+
 1)Import the included Postman collection: postman_collection.json
 
+
+
 2)Set an environment variable token after login.
+
+
 
 3)All protected routes will automatically use {{token}} in the Authorization header.
