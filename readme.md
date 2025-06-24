@@ -30,6 +30,10 @@ flask db upgrade
 
 
 Auth Flow
+
+
+
+
 🔸 Register
 POST /auth/register
 
@@ -47,6 +51,10 @@ Response:
 {
   "message": "User registered successfully."
 }
+
+
+
+
 🔸 Login
 POST /auth/login
 
@@ -62,6 +70,10 @@ Response:
 {
   "token": "your-jwt-token"
 }
+
+
+
+
 🔸 Using the token
 Include it in the header for protected routes:
           Authorization: Bearer your-jwt-token
