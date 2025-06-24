@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from server.app import db
+from app import db
 from models.episode import Episode
 from models.appearance import Appearance
 from flask_jwt_extended import jwt_required

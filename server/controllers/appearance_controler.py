@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
-from server.app import db
+from app import db
 from models.appearance import Appearance
 
 appearance_bp = Blueprint('appearance', __name__)

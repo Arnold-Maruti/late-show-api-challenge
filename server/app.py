@@ -2,7 +2,7 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-from flask_cors import CORS
+# from flask_cors import CORS
 from models import db
 from flask_jwt_extended import JWTManager
 
@@ -13,7 +13,7 @@ app.config['JWT_SECRET_KEY'] = 'super-secret-key'
 db.init_app(app)
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
-CORS(app)
+# CORS(app)
 
 from controllers.auth_controller import auth_bp
 from controllers.episode_controller import episode_bp

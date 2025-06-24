@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, make_response
 from models.guest import Guest
 
 guest_bp = Blueprint('guest', __name__)
@@ -7,4 +7,4 @@ guest_bp = Blueprint('guest', __name__)
 def list_guests():
     guests = Guest.query.all()
     result = [g.to_dict() for g in guests] 
-    return jsonify(result), 200
+    return make_response(result,200)
